@@ -12,3 +12,7 @@ jobs:
       run: curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && mv minikube-linux-amd64 /usr/local/bin/minikube && chmod +x /usr/local/bin/minikube
     - name: start minikube
       run: minikube start
+    - name: install helm
+      run: curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+    - name: helm install vpa
+      run: helm install vpa ./vpa
