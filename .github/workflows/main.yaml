@@ -14,5 +14,7 @@ jobs:
       run: minikube start
     - name: install helm
       run: curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+    - name: checkout
+      uses: actions/checkout@v2
     - name: helm install vpa
       run: helm install vpa ./vpa
