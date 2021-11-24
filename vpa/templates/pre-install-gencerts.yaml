@@ -70,8 +70,8 @@ spec:
       serviceAccountName: vpa-gencerts-sa
       containers:
         - name: pre-install-gencerts
-          image: "alpine/k8s:latest"
-          command: ["/bin/sh", "-c", "echo \"$GENCERTS_SH\" | /bin/sh"]
+          image: "bitnami/kubectl:1.22"
+          command: ["/bin/bash", "-c", "echo \"$GENCERTS_SH\" | /bin/bash"]
           env:
             - name: GENCERTS_SH
               value: |-
