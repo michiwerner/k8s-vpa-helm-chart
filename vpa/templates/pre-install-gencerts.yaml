@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: vpa-gencerts
+  labels:
+    app.kubernetes.io/version: {{ .Chart.AppVersion }}
+    helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+  annotations:
+    "helm.sh/hook": pre-install
+    "helm.sh/hook-delete-policy": hook-succeeded
+spec:
+  template:
+    metadata:
+      name: vpa-gencerts
+      labels:
+        helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    spec:
+      restartPolicy: Never
+      serviceAccountName: cluster-admin
+      containers:
+      - name: pre-install-gencerts
+        image: "alpine/k8s:latest"
+        command: ["/bin/sh", "-c", "echo \"$GENCERTS_SH\" | /bin/sh"]
+        env:
+          - name: GENCERTS_SH
+            value: |-
+              {{ .Files.Get "gencerts.sh" }}
