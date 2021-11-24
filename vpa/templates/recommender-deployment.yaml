@@ -1,3 +1,5 @@
+# COPYRIGHT NOTICE: This file has been copied without modifications
+# directly from https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler/deploy
 ---
 apiVersion: v1
 kind: ServiceAccount
