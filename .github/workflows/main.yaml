@@ -1,0 +1,13 @@
+name: Test, Package, Publish
+on:
+  push:
+    branches:
+      - main
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: Test
+    steps:
+    - name: start minikube 
+      id: minikube
+      uses: medyagh/setup-minikube@v0.0.2
