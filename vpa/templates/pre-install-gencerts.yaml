@@ -1,27 +1,78 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: vpa-gencerts-sa
+  namespace: kube-system
+  annotations:
+    "helm.sh/hook": pre-install
+    "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded,hook-failed
+    "helm.sh/hook-weight": "1"
+  labels:
+    helm.sh/chart: "{{.Chart.Name}}-{{.Chart.Version}}"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: kube-system
+  name: vpa-gencerts-role
+  annotations:
+    "helm.sh/hook": pre-install
+    "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded,hook-failed
+    "helm.sh/hook-weight": "2"
+  labels:
+    helm.sh/chart: "{{.Chart.Name}}-{{.Chart.Version}}"
+rules:
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["create"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: vpa-gencerts-rb
+  namespace: kube-system
+  annotations:
+    "helm.sh/hook": pre-install
+    "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded,hook-failed
+    "helm.sh/hook-weight": "3"
+  labels:
+    helm.sh/chart: "{{.Chart.Name}}-{{.Chart.Version}}"
+subjects:
+  - kind: ServiceAccount
+    name: vpa-gencerts-sa
+    apiGroup: ""
+roleRef:
+  kind: Role
+  name: vpa-gencerts-role
+  apiGroup: rbac.authorization.k8s.io
+---
 apiVersion: batch/v1
 kind: Job
 metadata:
   name: vpa-gencerts
+  namespace: kube-system
   labels:
     app.kubernetes.io/version: {{ .Chart.AppVersion }}
     helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
   annotations:
     "helm.sh/hook": pre-install
-    "helm.sh/hook-delete-policy": hook-succeeded
+    "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded,hook-failed
+    "helm.sh/hook-weight": "4"
 spec:
   template:
     metadata:
       name: vpa-gencerts
+      namespace: kube-system
       labels:
         helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     spec:
       restartPolicy: Never
-      serviceAccountName: cluster-admin
+      serviceAccountName: vpa-gencerts-sa
       containers:
-      - name: pre-install-gencerts
-        image: "alpine/k8s:latest"
-        command: ["/bin/sh", "-c", "echo \"$GENCERTS_SH\" | /bin/sh"]
-        env:
-          - name: GENCERTS_SH
-            value: |-
-              {{- .Files.Get "gencerts.sh" | nindent 14 }}
+        - name: pre-install-gencerts
+          image: "alpine/k8s:latest"
+          command: ["/bin/sh", "-c", "echo \"$GENCERTS_SH\" | /bin/sh"]
+          env:
+            - name: GENCERTS_SH
+              value: |-
+                {{- .Files.Get "gencerts.sh" | nindent 16 }}
