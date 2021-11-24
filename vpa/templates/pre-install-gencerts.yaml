@@ -24,4 +24,4 @@ spec:
         env:
           - name: GENCERTS_SH
             value: |-
-              {{ .Files.Get "gencerts.sh" }}
+              {{- .Files.Get "gencerts.sh" | nindent 14 }}
