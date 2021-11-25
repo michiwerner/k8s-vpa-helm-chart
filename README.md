@@ -14,7 +14,7 @@ limitations under the License.
 https://github.com/michiwerner/k8s-vpa-helm-chart/blob/main/LICENSE
 
 
-## Usage
+## Installation
 
 Using Helm 3.x, the installation is a two-step process.
 
@@ -25,3 +25,8 @@ First, add the repository:
 Then, install the chart:
 
 <pre><code>helm install -n kube-system vpa k8s-vpa/vpa</code></pre>
+
+
+## Usage
+
+Please refer to the official documentation to learn how to configure and use the VPA: https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler#contents
