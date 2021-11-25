@@ -52,6 +52,6 @@ jobs:
         with:
           name: helm-package
       - name: move artifiact into place and generate index
-        run: mkdir -p ./releases; rm -f index.yaml && mv -f vpa-*.tgz releases/ && helm repo index ./releases
+        run: mkdir -p ./releases; mv -f vpa-*.tgz releases/ && helm repo index ./releases
       - name: commit and push
-        run: git add index.yaml releases/*.tgz && git commit -m "publish release" && git push
+        run: git add releases/* && git commit -m "publish release" && git push
