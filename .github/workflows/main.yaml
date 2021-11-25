@@ -17,4 +17,4 @@ jobs:
     - name: checkout
       uses: actions/checkout@v2
     - name: helm install vpa
-      run: helm install vpa ./vpa
+      run: helm install -n kube-system vpa ./vpa
