@@ -24,4 +24,4 @@ First, add the repository:
 
 Then, install the chart:
 
-<pre><code>helm install -n kube-system k8s-vpa/vpa</code></pre>
+<pre><code>helm install -n kube-system vpa k8s-vpa/vpa</code></pre>
