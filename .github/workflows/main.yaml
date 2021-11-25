@@ -53,5 +53,7 @@ jobs:
           name: helm-package
       - name: move artifiact into place and generate index
         run: mkdir -p ./releases; mv -f vpa-*.tgz releases/ && helm repo index ./releases
+      - name: set git user config
+        run: git config --global user.email "workflow@github-actions.local" && git config --global user.name "GitHub Actions Workflow"
       - name: commit and push
         run: git add releases/* && git commit -m "publish release" && git push
