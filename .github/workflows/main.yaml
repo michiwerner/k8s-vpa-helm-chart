@@ -18,3 +18,38 @@ jobs:
       uses: actions/checkout@v2
     - name: helm install vpa
       run: helm install -n kube-system vpa ./vpa
+  package:
+    runs-on: ubuntu-latest
+    name: Package
+    steps:
+      - name: install helm
+        run: curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: helm package vpa
+        run: helm package ./vpa
+      - name: upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: helm-package
+          retention-days: 1
+          path: |
+            vpa-*.tgz
+  publish:
+    runs-on: ubuntu-latest
+    name: Publish
+    steps:
+      - name: install helm
+        run: curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+      - name: checkout gh-pages branch
+        uses: actions/checkout@v2
+        with:
+          branch: gh-pages
+      - name: download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: helm-package
+      - name: move artifiact into place and generate index
+        run: mkdir -p ./releases; rm index.yaml && mv -f vpa-*.tgz releases/ && helm repo index ./releases
+      - name: commit and push
+        run: git add index.yaml releases/*.tgz && git commit -m "publish release" && git push
