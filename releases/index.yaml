@@ -3,12 +3,12 @@ entries:
   vpa:
   - apiVersion: v2
     appVersion: 0.9.2
-    created: "2021-11-25T22:25:31.060533646Z"
+    created: "2021-11-25T22:44:09.261657932Z"
     description: An inofficial Helm chart for the Kubernetes Vertical Pod Autoscaler
-    digest: 89f280966ec534fcf983d9a4d0d21a358f59b3a906271b2474ef40da12d08ea6
+    digest: c6be8e4782251d438f6f41e82899d15eb1e6608df77b2a6de73e67ebf45bebd6
     name: vpa
     type: application
     urls:
     - vpa-0.1.0.tgz
     version: 0.1.0
-generated: "2021-11-25T22:25:31.059379559Z"
+generated: "2021-11-25T22:44:09.259904623Z"
