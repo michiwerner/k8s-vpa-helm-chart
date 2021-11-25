@@ -19,6 +19,7 @@ jobs:
     - name: helm install vpa
       run: helm install -n kube-system vpa ./vpa
   package:
+    needs: test
     runs-on: ubuntu-latest
     name: Package
     steps:
@@ -36,6 +37,7 @@ jobs:
           path: |
             vpa-*.tgz
   publish:
+    needs: package
     runs-on: ubuntu-latest
     name: Publish
     steps:
