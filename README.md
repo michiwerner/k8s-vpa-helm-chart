@@ -1,1 +1,0 @@
-# vpa-helm-chart
