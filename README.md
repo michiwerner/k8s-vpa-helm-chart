@@ -20,12 +20,8 @@ Using Helm 3.x, the installation is a two-step process.
 
 First, add the repository:
 
-<pre><code>
-  helm repo add k8s-vpa https://michiwerner.github.io/k8s-vpa-helm-chart/releases
-</code></pre>
+<pre><code>helm repo add k8s-vpa https://michiwerner.github.io/k8s-vpa-helm-chart/releases</code></pre>
 
 Then, install the chart:
 
-<pre><code>a simple
-  helm install -n kube-system k8s-vpa/vpa
-</code></pre>
+<pre><code>helm install -n kube-system k8s-vpa/vpa</code></pre>
