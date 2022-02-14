@@ -34,15 +34,15 @@ spec:
             - "/updater" # Taken from Docker image
             - "--v=4" # Taken from Docker image
             - "--stderrthreshold=info" # Taken from Docker image
-            - "-updater-interval={{.Values.updater.updaterInterval}}"
-            - "-min-replicas={{.Values.updater.minReplicas}}"
-            - "-eviction-tolerance={{.Values.updater.evictionTolerance}}"
-            - "-eviction-rate-limit={{.Values.updater.evictionRateLimit}}"
-            - "-eviction-rate-burst={{.Values.updater.evictionRateBurst}}"
-            - "-kube-api-qps={{.Values.updater.kubeApiQps}}"
-            - "-kube-api-burst={{.Values.updater.kubeApiBurst}}"
-            - "-use-admission-controller-status={{.Values.updater.useAdmissionControllerStatus}}"
-            - "-vpa-object-namespace={{.Values.updater.vpaObjectNamespace}}"
+            - "--updater-interval={{.Values.updater.updaterInterval}}"
+            - "--min-replicas={{.Values.updater.minReplicas}}"
+            - "--eviction-tolerance={{.Values.updater.evictionTolerance}}"
+            - "--eviction-rate-limit={{.Values.updater.evictionRateLimit}}"
+            - "--eviction-rate-burst={{.Values.updater.evictionRateBurst}}"
+            - "--kube-api-qps={{.Values.updater.kubeApiQps}}"
+            - "--kube-api-burst={{.Values.updater.kubeApiBurst}}"
+            - "--use-admission-controller-status={{.Values.updater.useAdmissionControllerStatus}}"
+            - "--vpa-object-namespace={{.Values.updater.vpaObjectNamespace}}"
           env:
             - name: NAMESPACE
               valueFrom:
