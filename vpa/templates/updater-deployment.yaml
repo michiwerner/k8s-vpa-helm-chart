@@ -1,5 +1,5 @@
-# COPYRIGHT NOTICE: This file has been copied without modifications
-# directly from https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler/deploy
+# COPYRIGHT NOTICE: This file has been copied (with modifications)
+# from https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler/deploy
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -39,8 +39,6 @@ spec:
             - "--eviction-tolerance={{.Values.updater.evictionTolerance}}"
             - "--eviction-rate-limit={{.Values.updater.evictionRateLimit}}"
             - "--eviction-rate-burst={{.Values.updater.evictionRateBurst}}"
-            - "--kube-api-qps={{.Values.updater.kubeApiQps}}"
-            - "--kube-api-burst={{.Values.updater.kubeApiBurst}}"
             - "--use-admission-controller-status={{.Values.updater.useAdmissionControllerStatus}}"
             - "--vpa-object-namespace={{.Values.updater.vpaObjectNamespace}}"
           env:
