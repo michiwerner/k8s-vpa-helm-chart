@@ -12,6 +12,8 @@ jobs:
         run: curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && mv minikube-linux-amd64 /usr/local/bin/minikube && chmod +x /usr/local/bin/minikube
       - name: start minikube
         run: minikube start
+      - name: enable minikube metrics-server addon
+        run: minikube addons enable metrics-server
       - name: install helm
         run: curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
       - name: checkout
@@ -23,9 +25,9 @@ jobs:
       - name: test correct operation of the VPA - check for correct initial cpu requests
         run: sleep 30 && [ "$(kubectl get pods -o=jsonpath='{.items[*].spec.containers[*].resources.requests.cpu}')" = "100m 100m" ]
       - name: test correct operation of the VPA - wait for VPA to do its thing
-        run: sleep 660
+        run: sleep 360
       - name: test correct operation of the VPA - check for correct VPA results
-        run: "[ \"$(kubectl get pods -o=jsonpath='{.items[*].spec.containers[*].resources.requests.cpu}')\" != \"100m 100m\" ]"
+        run: requestsString="$(kubectl get pods -o=jsonpath='{.items[*].spec.containers[*].resources.requests.cpu}')"; [ -n "$requestsString" ] && [ "$requestsString" != "100m 100m" ]
       - name: test correct operation of the VPA - delete hamster
         run: kubectl delete -f kubectl create -f https://raw.githubusercontent.com/kubernetes/autoscaler/c4bd38b17a92b7039bbd3a2de67e53cf102b6936/vertical-pod-autoscaler/examples/hamster.yaml
   package:
