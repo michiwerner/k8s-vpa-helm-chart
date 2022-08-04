@@ -18,6 +18,10 @@ jobs:
         uses: actions/checkout@v2
       - name: helm install vpa
         run: helm install --wait --timeout 120s -n kube-system vpa ./vpa
+      - name: test correct operation of the VPA - deploy hamster
+        run: kubectl create -f https://raw.githubusercontent.com/kubernetes/autoscaler/c4bd38b17a92b7039bbd3a2de67e53cf102b6936/vertical-pod-autoscaler/examples/hamster.yaml
+      - name: test correct operation of the VPA - check results
+        run: sleep 360 && [ "$(kubectl get pods -o=jsonpath='{.items[*].spec.containers[*].resources.requests.cpu}')" = "500m 500m" ] && kubectl delete deployment hamster
   package:
     needs: test
     runs-on: ubuntu-latest
