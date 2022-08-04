@@ -25,7 +25,7 @@ jobs:
       - name: test correct operation of the VPA - wait for VPA to do its thing
         run: sleep 360
       - name: test correct operation of the VPA - check for correct VPA results
-        run: '[ "$(kubectl get pods -o=jsonpath='{.items[*].spec.containers[*].resources.requests.cpu}')" != "100m 100m" ]'
+        run: "[ \"$(kubectl get pods -o=jsonpath='{.items[*].spec.containers[*].resources.requests.cpu}')\" != \"100m 100m\" ]"
       - name: test correct operation of the VPA - delete hamster
         run: kubectl delete -f kubectl create -f https://raw.githubusercontent.com/kubernetes/autoscaler/c4bd38b17a92b7039bbd3a2de67e53cf102b6936/vertical-pod-autoscaler/examples/hamster.yaml
   package:
