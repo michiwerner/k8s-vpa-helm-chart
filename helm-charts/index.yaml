@@ -3,9 +3,9 @@ entries:
   vpa:
   - apiVersion: v2
     appVersion: 0.11.0
-    created: "2022-06-23T11:44:52.572026872Z"
+    created: "2022-08-04T20:37:42.442273381Z"
     description: An inofficial Helm chart for the Kubernetes Vertical Pod Autoscaler
-    digest: 94cdf68a428236a23a2e2c11fc4b7a79b4ec1c0f34bbda8dc1a0608cca615565
+    digest: 4fa089115ddad50ba9d112f467ab5d11bc199b1fdb772a91b6765074807da857
     name: vpa
     type: application
     urls:
@@ -13,7 +13,7 @@ entries:
     version: 0.3.0
   - apiVersion: v2
     appVersion: 0.9.2
-    created: "2022-06-23T11:44:52.57135647Z"
+    created: "2022-08-04T20:37:42.441762584Z"
     description: An inofficial Helm chart for the Kubernetes Vertical Pod Autoscaler
     digest: f8563eacdb1f544b9aae3d94eeb18ad53829b47628419e361b0073df7913044d
     name: vpa
@@ -23,7 +23,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: 0.9.2
-    created: "2022-06-23T11:44:52.570647368Z"
+    created: "2022-08-04T20:37:42.441213786Z"
     description: An inofficial Helm chart for the Kubernetes Vertical Pod Autoscaler
     digest: 022e5e87e4937e17f9c6d85394dd8c622bf8c9f6318bcb596de70054f6b3518e
     name: vpa
@@ -31,4 +31,4 @@ entries:
     urls:
     - vpa-0.1.0.tgz
     version: 0.1.0
-generated: "2022-06-23T11:44:52.569581364Z"
+generated: "2022-08-04T20:37:42.44029779Z"
