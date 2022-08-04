@@ -23,7 +23,7 @@ jobs:
       - name: test correct operation of the VPA - check for correct initial cpu requests
         run: sleep 30 && [ "$(kubectl get pods -o=jsonpath='{.items[*].spec.containers[*].resources.requests.cpu}')" = "100m 100m" ]
       - name: test correct operation of the VPA - wait for VPA to do its thing
-        run: sleep 360
+        run: sleep 660
       - name: test correct operation of the VPA - check for correct VPA results
         run: "[ \"$(kubectl get pods -o=jsonpath='{.items[*].spec.containers[*].resources.requests.cpu}')\" != \"100m 100m\" ]"
       - name: test correct operation of the VPA - delete hamster
