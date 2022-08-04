@@ -52,6 +52,7 @@ jobs:
     needs: package
     runs-on: ubuntu-latest
     name: Publish
+    if: github.ref == 'refs/heads/main'
     steps:
       - name: install helm
         run: curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
