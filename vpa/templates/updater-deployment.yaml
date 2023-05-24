@@ -1,12 +1,6 @@
 # COPYRIGHT NOTICE: This file has been copied (with modifications)
 # from https://github.com/kubernetes/autoscaler/blob/master/vertical-pod-autoscaler/deploy/updater-deployment.yaml
 ---
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: vpa-updater
-  namespace: kube-system
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
